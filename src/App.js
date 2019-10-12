@@ -1,9 +1,15 @@
 import React, { Component } from "react";
-import "./App.css";
-import Todos from "./components/todos/Todos";
-import Header from "./components/layout/Header";
-import AddTodo from "./components/todos/AddTodo";
 import uuid from 'uuid';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+
+// COMPONENTS
+import Header from './components/layout/Header';
+import AddTodo from './components/todos/AddTodo';
+import Todos from './components/todos/Todos';
+import About from './components/pages/about/About';
+
+// CSS 
+import "./App.css";
 
 class App extends Component {
   state = {
@@ -17,13 +23,26 @@ class App extends Component {
   render() {
     return (
       // JSX = JAVASCRIPT XML SCRIPT
-      <div className="App">
-        <div className="Container">
-          <Header />
-          <AddTodo addTodo={this.addTodo}/>
-          <Todos todos={this.state.todos} markComplete={this.markComplete} delTodo={this.delTodo}/>
+      <Router>
+        <div className="App">
+          <div className="Container">
+            <Header />
+            <Route exact path="/" render={props => (
+              <React.Fragment>
+                <AddTodo addTodo={this.addTodo}/>
+                <Todos todos={this.state.todos} markComplete={this.markComplete} delTodo={this.delTodo}/>
+              </React.Fragment>
+            )} />
+            <Route exact path="/home" render={props => (
+              <React.Fragment>
+                <AddTodo addTodo={this.addTodo}/>
+                <Todos todos={this.state.todos} markComplete={this.markComplete} delTodo={this.delTodo}/>
+              </React.Fragment>
+            )} />
+            <Route path="/about" component={About}/>
+          </div>
         </div>
-      </div>
+      </Router>
     );
   }
 
