@@ -5,6 +5,7 @@ import Axios from "axios";
 
 // COMPONENTS
 import Header from './components/layout/Header';
+import Footer from './components/layout/Footer';
 import AddTodo from './components/todos/AddTodo';
 import Todos from './components/todos/Todos';
 import About from './components/pages/about/About';
@@ -45,6 +46,7 @@ class App extends Component {
               </React.Fragment>
             )} />
             <Route path="/about" component={About}/>
+            <Footer />
           </div>
         </div>
       </Router>
